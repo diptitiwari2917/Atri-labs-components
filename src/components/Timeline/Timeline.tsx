@@ -6,7 +6,7 @@ interface TimeInterface {
 }
 
 interface StatusCircleInterface {
-  eventStatus: string;
+  eventStatus: EventStatusEnum;
   customStatusIcon?: string;
 }
 
@@ -31,7 +31,7 @@ enum EventStatusEnum {
 interface TimelineInterface {
   events: Array<{
     time: string;
-    status: string;
+    status: EventStatusEnum;
     description: string;
     title: string;
     customStatusIcon?: string;

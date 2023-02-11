@@ -2,14 +2,26 @@ import React, {useState} from "react";
 import styled from "styled-components";
 const arrowIcon: string = require("../assets/arrow.svg").default;
 
-interface NodeProps {
+export interface NodeProps {
   label: string;
   children?: NodeProps[];
   id: never;
   disabled: boolean;
 }
 
-interface TreeNodeProps extends TreeProps{
+export interface TreeProps {
+  data: any[];
+  allowNodeSelection?: boolean;
+  expanded?: string[]|number[];
+  nodeId?: string;
+  handleNodeSelect?: Function;
+  expandIcon?: string;
+  collapseIcon?: string;
+  multiSelect?: boolean;
+  handleNodeToggle?: Function;
+}
+
+export interface TreeNodeProps extends TreeProps{
   node: NodeProps;
   setSelectedNodes?: Function;
   selectedNodes?: string[]|number[];
@@ -154,18 +166,6 @@ const TreeNode: React.FC<TreeNodeProps> = (props) => {
     </TreeViewContainer>
   );
 };
-
-interface TreeProps {
-  data: any[];
-  allowNodeSelection?: boolean;
-  expanded?: string[]|number[];
-  nodeId?: string;
-  handleNodeSelect?: Function;
-  expandIcon?: string;
-  collapseIcon?: string;
-  multiSelect?: boolean;
-  handleNodeToggle?: Function;
-}
 
 const Tree: React.FC<TreeProps> = (props) => {
   const {

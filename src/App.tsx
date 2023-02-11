@@ -1,6 +1,12 @@
 import React from "react";
 import Tree from "./components/Tree";
-import {default as Timeline, TimelineVariantEnum} from "./components/Timeline/Timeline";
+import {
+  default as Timeline,
+  EventInterface,
+  EventStatusEnum,
+  TimelineVariantEnum
+} from "./components/Timeline/Timeline";
+
 const expandIcon: string = require("./assets/plus.svg").default;
 const collapseIcon: string = require("./assets/minus.svg").default;
 const custom: string = require("./assets/emoji.svg").default;
@@ -8,7 +14,7 @@ const custom: string = require("./assets/emoji.svg").default;
 interface Event {
   title: string;
   time: string;
-  status: string;
+  status?: string;
   description: string;
   customStatusIcon?: string;
 }
@@ -68,51 +74,49 @@ const data: TreeNode[] = [
   },
 ];
 
-const events: Event[] = [
+const events: EventInterface[] = [
   {
     title: "Title One",
     time: "01:00 AM",
-    status: "success",
+    status: EventStatusEnum.SUCCESS,
     description: "Create a services site 2015-09-01",
   },
   {
     title: "Title Two",
     time: "01:30 AM",
-    status: "success",
+    status: EventStatusEnum.SUCCESS,
     description: "Create a services site 2015-09-01",
   },
   {
     title: "Title Three",
     time: "02:00 AM",
-    status: "danger",
+    status: EventStatusEnum.DANGER,
     description:
       "Solve initial network problems 1, Solve initial network problems 2, Solve initial network problems 3 2015-09-01 ",
   },
   {
     title: "Title Four",
     time: "02:30 AM",
-    status: "informative",
+    status: EventStatusEnum.INFORMATIVE,
     description:
       "Technical testing 1, Technical testing 2, Technical testing 3 2015-09-01",
   },
   {
     title: "Title Five",
     time: "03:00 AM",
-    status: "default",
     description:
       "Technical testing 1, Technical testing 2, Technical testing 3 2015-09-01",
   },
   {
     title: "Title Six",
     time: "03:30 AM",
-    status: "default",
     description:
       "Technical testing 1, Technical testing 2, Technical testing 3 2015-09-01",
   },
   {
     title: "Title Seven",
     time: "04:00 AM",
-    status: "custom",
+    status: EventStatusEnum.CUSTOM,
     customStatusIcon: custom,
     description: "Custom color testing",
   },
@@ -155,7 +159,7 @@ const App: React.FC = () => {
           console.log("Toggle Nodes", nodeIds);
         }}
       />
-      <Timeline events={events} alternate={false} />
+      <Timeline events={events} alternate={false} variant={TimelineVariantEnum.SOLID}/>
     </>
   );
 };

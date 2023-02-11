@@ -1,16 +1,16 @@
 import React from "react";
 import "./styles.css";
 
-interface TimeInterface {
+export interface TimeInterface {
   eventTime: string;
 }
 
-interface StatusCircleInterface {
+export interface StatusCircleInterface {
   eventStatus: EventStatusEnum;
   customStatusIcon?: string;
 }
 
-interface DescriptionInterface {
+export interface DescriptionInterface {
   eventDescription?: string;
   eventTitle?: string;
 }
@@ -20,7 +20,7 @@ export enum TimelineVariantEnum {
   OUTLINED = "outlined"
 }
 
-enum EventStatusEnum {
+export enum EventStatusEnum {
   CUSTOM= "custom",
   SUCCESS= "success",
   DANGER= "danger",
@@ -28,14 +28,16 @@ enum EventStatusEnum {
   DEFAULT= "default"
 }
 
-interface TimelineInterface {
-  events: Array<{
-    time?: string;
-    status?: EventStatusEnum;
-    description?: string;
-    title?: string;
-    customStatusIcon?: string;
-  }>;
+export interface EventInterface {
+  time?: string;
+  status?: EventStatusEnum;
+  description?: string;
+  title?: string;
+  customStatusIcon?: string;
+}
+
+export interface TimelineInterface {
+  events: Array<EventInterface>;
   alternate?: boolean;
   variant?: TimelineVariantEnum;
 }

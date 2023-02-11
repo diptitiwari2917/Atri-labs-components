@@ -11,8 +11,8 @@ interface StatusCircleInterface {
 }
 
 interface DescriptionInterface {
-  eventDescription: string;
-  eventTitle: string;
+  eventDescription?: string;
+  eventTitle?: string;
 }
 
 export enum TimelineVariantEnum {
@@ -30,10 +30,10 @@ enum EventStatusEnum {
 
 interface TimelineInterface {
   events: Array<{
-    time: string;
-    status: EventStatusEnum;
-    description: string;
-    title: string;
+    time?: string;
+    status?: EventStatusEnum;
+    description?: string;
+    title?: string;
     customStatusIcon?: string;
   }>;
   alternate?: boolean;
@@ -67,7 +67,7 @@ const Description: React.FC<DescriptionInterface> = ({
     <div className="timeline-content">
       <h4 className="title"> {eventTitle}</h4>
       <p>
-        {eventDescription.split(",").map((element) => {
+        {eventDescription?.split(",").map((element) => {
           return <p key={element}>{element}</p>;
         })}
       </p>
@@ -96,14 +96,14 @@ const Timeline: React.FC<TimelineInterface> = ({
               : "timeline-block-left"
           } ${event.status}`}
         >
-          <Time eventTime={event.time} />
+          {event?.time && <Time eventTime={event?.time} />}
           <StatusCircle
-            eventStatus={event.status}
+            eventStatus={event.status || EventStatusEnum.DEFAULT}
             customStatusIcon={event?.customStatusIcon}
           />
           <Description
-            eventDescription={event.description}
-            eventTitle={event.title}
+            eventDescription={event?.description}
+            eventTitle={event?.title}
           />
         </div>
       ))}

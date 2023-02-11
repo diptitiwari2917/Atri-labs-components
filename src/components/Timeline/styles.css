@@ -1,0 +1,173 @@
+.timeline-container {
+  width: 90%;
+  padding: 50px 0;
+  margin: 25px auto;
+  position: relative;
+  overflow: hidden;
+}
+
+.timeline-container::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  margin-left: -1px;
+  width: 2px;
+  height: 100%;
+  background: #f6f6f6;
+  background: linear-gradient(to bottom,
+      transparent 0%,
+      #f6f6f6 5%,
+      #f6f6f6 95%,
+      transparent 100%);
+  z-index: 1;
+  opacity: 0;
+}
+
+.timeline-block {
+  width: calc(50% + 8px);
+  display: flex;
+  justify-content: space-between;
+  clear: both;
+  position: relative;
+  padding-bottom: 30px;
+}
+
+.custom.timeline-block {
+  align-items: baseline;
+}
+
+.time {
+  color: gray;
+  position: absolute;
+  width: 100%;
+}
+
+.timeline-block-right .time {
+  right: calc(100% - -15px);
+  text-align: right;
+}
+
+.timeline-block-left .time {
+  left: calc(100% - -15px);
+  text-align: left;
+  direction: ltr;
+}
+
+h4.title {
+  margin: 0;
+}
+
+.timeline-block.timeline-block-left:before {
+  content: "";
+  position: absolute;
+  right: 7px;
+  height: 100%;
+  width: 2px;
+  background: lightgray;
+  display: block !important;
+}
+
+.timeline-block.timeline-block-right:before {
+  content: "";
+  position: absolute;
+  left: 7px;
+  height: 100%;
+  width: 2px;
+  background: lightgray;
+  display: block !important;
+}
+
+.timeline-block:last-child:before {
+  opacity: 0;
+}
+
+.timeline-block-right {
+  float: right;
+  text-align: left;
+}
+
+.timeline-block-left {
+  float: left;
+  text-align: right;
+  direction: rtl;
+}
+
+.marker {
+  width: 8px;
+  height: 8px;
+  border-radius: 100%;
+  border: 4px solid gray;
+  background: white;
+  z-index: 1;
+}
+
+.solid .marker {
+  width: 0;
+  height: 0;
+  border-width: 8px;
+  z-index: 1;
+}
+
+.solid .success .marker {
+  border-color: green;
+}
+
+.solid .informative .marker {
+  border-color: blue;
+}
+
+.solid .danger .marker {
+  border-color: red;
+}
+
+.solid .default .marker {
+  border-color: gray;
+}
+
+.success .marker {
+  border-color: green;
+}
+
+.informative .marker {
+  border-color: blue;
+}
+
+.danger .marker {
+  border-color: red;
+}
+
+.default .marker {
+  border-color: gray;
+}
+
+.timeline-content {
+  width: 95%;
+  padding: 0 15px;
+}
+
+.timeline-content p {
+  direction: ltr;
+  margin: 0;
+}
+
+@media screen and (max-width: 768px) {
+  .timeline-container::before {
+    left: 8px;
+    width: 2px;
+  }
+
+  .timeline-block {
+    width: 100%;
+    text-align: left;
+  }
+
+  .timeline-block-right {
+    float: none;
+  }
+
+  .timeline-block-left {
+    float: none;
+    direction: ltr;
+  }
+}

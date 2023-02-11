@@ -159,7 +159,7 @@ const App: React.FC = () => {
           console.log("Toggle Nodes", nodeIds);
         }}
       />
-      <Timeline events={events} alternate={false} variant={TimelineVariantEnum.SOLID}/>
+      <Timeline events={events} align={"left"} alternate={true} variant={TimelineVariantEnum.SOLID}/>
     </>
   );
 };

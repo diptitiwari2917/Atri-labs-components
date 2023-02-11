@@ -40,6 +40,7 @@ export interface TimelineInterface {
   events: Array<EventInterface>;
   alternate?: boolean;
   variant?: TimelineVariantEnum;
+  align?: 'right'|'left'
 }
 
 const Time: React.FC<TimeInterface> = ({ eventTime }) => {
@@ -81,7 +82,19 @@ const Timeline: React.FC<TimelineInterface> = ({
   events,
   alternate,
   variant,
+  align
 }) => {
+
+  const getTimelineAlign = (index: number) => {
+    if (alternate) {
+      return index % 2 === 0 ? " timeline-block-right " : " timeline-block-left"
+    } else if (align === 'right') {
+      return " timeline-block-right ";
+    } else {
+      return " timeline-block-left ";
+    }
+  }
+
   return (
     <div
       className={`
@@ -92,11 +105,7 @@ const Timeline: React.FC<TimelineInterface> = ({
       {events.map((event, index) => (
         <div
           key={index}
-          className={`timeline-block ${
-            (alternate && index % 2 === 0) || !alternate
-              ? "timeline-block-right "
-              : "timeline-block-left"
-          } ${event.status}`}
+          className={`timeline-block ${getTimelineAlign(index)} ${event.status}`}
         >
           {event?.time && <Time eventTime={event?.time} />}
           <StatusCircle
@@ -116,7 +125,8 @@ const Timeline: React.FC<TimelineInterface> = ({
 Timeline.defaultProps = {
   events: [],
   variant: TimelineVariantEnum.OUTLINED,
-  alternate: false
+  alternate: false,
+  align: 'right'
 }
 
 export default Timeline;

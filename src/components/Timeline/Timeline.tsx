@@ -13,19 +13,20 @@ export interface StatusCircleInterface {
 export interface DescriptionInterface {
   eventDescription?: string;
   eventTitle?: string;
+  eventTime?: string;
 }
 
 export enum TimelineVariantEnum {
   SOLID = "solid",
-  OUTLINED = "outlined"
+  OUTLINED = "outlined",
 }
 
 export enum EventStatusEnum {
-  CUSTOM= "custom",
-  SUCCESS= "success",
-  DANGER= "danger",
-  INFORMATIVE= "informative",
-  DEFAULT= "default"
+  CUSTOM = "custom",
+  SUCCESS = "success",
+  DANGER = "danger",
+  INFORMATIVE = "informative",
+  DEFAULT = "default",
 }
 
 export interface EventInterface {
@@ -40,7 +41,7 @@ export interface TimelineInterface {
   events: Array<EventInterface>;
   alternate?: boolean;
   variant?: TimelineVariantEnum;
-  align?: 'right'|'left'
+  align?: "right" | "left";
 }
 
 const Time: React.FC<TimeInterface> = ({ eventTime }) => {
@@ -82,30 +83,41 @@ const Timeline: React.FC<TimelineInterface> = ({
   events,
   alternate,
   variant,
-  align
+  align,
 }) => {
-
   const getTimelineAlign = (index: number) => {
     if (alternate) {
-      return index % 2 === 0 ? " timeline-block-right " : " timeline-block-left"
-    } else if (align === 'right') {
+      return index % 2 === 0
+        ? " timeline-block-right "
+        : " timeline-block-left";
+    } else if (align === "right") {
       return " timeline-block-right ";
     } else {
       return " timeline-block-left ";
     }
-  }
+  };
+
+  const getTime = () => {
+    const eventsWithoutTime = events.filter((event) => event.time);
+    if (eventsWithoutTime.length === 0) {
+      return "";
+    } else {
+      return "hasTime";
+    }
+  };
 
   return (
     <div
-      className={`
-        ${variant === TimelineVariantEnum.OUTLINED && "timeline-container "} +
-        ${variant === TimelineVariantEnum.SOLID && "timeline-container solid"}
-      `}
+      className={`timeline-container ${getTime()} 
+        ${variant === TimelineVariantEnum.OUTLINED ? "outlined " : ""}
+        ${alternate === true ? "alternate " : ""}
+        ${variant === TimelineVariantEnum.SOLID ? "solid" : ""}`}
     >
       {events.map((event, index) => (
         <div
           key={index}
-          className={`timeline-block ${getTimelineAlign(index)} ${event.status}`}
+          className={`timeline-block ${getTimelineAlign(index)} 
+          ${event.status}`}
         >
           {event?.time && <Time eventTime={event?.time} />}
           <StatusCircle
@@ -126,7 +138,7 @@ Timeline.defaultProps = {
   events: [],
   variant: TimelineVariantEnum.OUTLINED,
   alternate: false,
-  align: 'right'
-}
+  align: "right",
+};
 
 export default Timeline;

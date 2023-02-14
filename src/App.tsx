@@ -4,20 +4,12 @@ import {
   default as Timeline,
   EventInterface,
   EventStatusEnum,
-  TimelineVariantEnum
+  TimelineVariantEnum,
 } from "./components/Timeline/Timeline";
 
 const expandIcon: string = require("./assets/plus.svg").default;
 const collapseIcon: string = require("./assets/minus.svg").default;
 const custom: string = require("./assets/emoji.svg").default;
-
-interface Event {
-  title: string;
-  time: string;
-  status?: string;
-  description: string;
-  customStatusIcon?: string;
-}
 
 interface TreeNode {
   id: number;
@@ -83,13 +75,13 @@ const events: EventInterface[] = [
   },
   {
     title: "Title Two",
-    time: "01:30 AM",
+    time: "02: AM",
     status: EventStatusEnum.SUCCESS,
     description: "Create a services site 2015-09-01",
   },
   {
     title: "Title Three",
-    time: "02:00 AM",
+    time: "01:30 AM",
     status: EventStatusEnum.DANGER,
     description:
       "Solve initial network problems 1, Solve initial network problems 2, Solve initial network problems 3 2015-09-01 ",
@@ -131,7 +123,8 @@ const App: React.FC = () => {
         allowNodeSelection={true} //show checkbox or not
         expanded={[1]} //expand specific node
         multiSelect={false} // allow multi select for node
-        handleNodeSelect={(nodeIds: any) => { // handler function for
+        handleNodeSelect={(nodeIds: any) => {
+          // handler function for
           console.log("Selected Nodes", nodeIds);
         }}
         handleNodeToggle={(nodeIds: any) => {
@@ -159,7 +152,12 @@ const App: React.FC = () => {
           console.log("Toggle Nodes", nodeIds);
         }}
       />
-      <Timeline events={events} align={"left"} alternate={true} variant={TimelineVariantEnum.SOLID}/>
+      <Timeline
+        events={events}
+        align={"left"}
+        alternate={true}
+        variant={TimelineVariantEnum.SOLID}
+      />
     </>
   );
 };

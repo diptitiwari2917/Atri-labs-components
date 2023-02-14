@@ -6,24 +6,6 @@
   overflow: hidden;
 }
 
-.timeline-container::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 50%;
-  margin-left: -1px;
-  width: 2px;
-  height: 100%;
-  background: #f6f6f6;
-  background: linear-gradient(to bottom,
-      transparent 0%,
-      #f6f6f6 5%,
-      #f6f6f6 95%,
-      transparent 100%);
-  z-index: 1;
-  opacity: 0;
-}
-
 .timeline-block {
   width: calc(50% + 8px);
   display: flex;
@@ -42,6 +24,7 @@
   position: absolute;
   width: 100%;
 }
+
 
 .timeline-block-right .time {
   right: calc(100% - -15px);
@@ -93,7 +76,7 @@ h4.title {
   direction: rtl;
 }
 
-.marker {
+.timeline-container:not(.outlined, .solid) .marker {
   width: 8px;
   height: 8px;
   border-radius: 100%;
@@ -102,10 +85,45 @@ h4.title {
   z-index: 1;
 }
 
+.outlined .marker {
+  width: 8px;
+  height: 8px;
+  border-radius: 100%;
+  border: 4px solid gray;
+  background: white;
+  z-index: 1;
+}
+
+.outlined .marker {
+  width: 8px;
+  height: 8px;
+  border-radius: 100%;
+  border: 4px solid gray;
+  background: white;
+  z-index: 1;
+}
+
+.outlined .success .marker {
+  border-color: green;
+}
+
+.outlined .informative .marker {
+  border-color: blue;
+}
+
+.outlined .danger .marker {
+  border-color: red;
+}
+
+.outlined .default .marker {
+  border-color: gray;
+}
+
 .solid .marker {
   width: 0;
   height: 0;
-  border-width: 8px;
+  border-radius: 100%;
+  border: 8px solid gray;
   z-index: 1;
 }
 
@@ -125,22 +143,6 @@ h4.title {
   border-color: gray;
 }
 
-.success .marker {
-  border-color: green;
-}
-
-.informative .marker {
-  border-color: blue;
-}
-
-.danger .marker {
-  border-color: red;
-}
-
-.default .marker {
-  border-color: gray;
-}
-
 .timeline-content {
   width: 95%;
   padding: 0 15px;
@@ -157,17 +159,25 @@ h4.title {
     width: 2px;
   }
 
-  .timeline-block {
+  .timeline-container:not(.alternate) .timeline-block {
     width: 100%;
-    text-align: left;
   }
 
-  .timeline-block-right {
-    float: none;
+  .timeline-container.hasTime:not(.alternate) .timeline-block {
+    width: calc(100% - 85px);
   }
 
-  .timeline-block-left {
-    float: none;
-    direction: ltr;
+  .timeline-block.timeline-block-left {
+    text-align: right;
+  }
+
+  .timeline-container:not(.solid) .marker {
+    width: 8px;
+    height: 7px;
+  }
+
+  .alternate:not(.solid) .marker {
+    width: 8px;
+    height: 6px;
   }
 }
